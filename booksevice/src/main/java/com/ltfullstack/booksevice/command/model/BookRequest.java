@@ -1,21 +1,15 @@
-package com.ltfullstack.booksevice.command.data;
+package com.ltfullstack.booksevice.command.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "books")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+@NoArgsConstructor
+public class BookRequest {
     private String name;
     private String author;
     private Boolean isReady;

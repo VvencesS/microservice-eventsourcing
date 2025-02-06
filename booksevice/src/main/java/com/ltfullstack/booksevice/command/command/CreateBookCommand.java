@@ -1,20 +1,17 @@
-package com.ltfullstack.booksevice.command.data;
+package com.ltfullstack.booksevice.command.command;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-@Entity
-@Table(name = "books")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+@NoArgsConstructor
+public class CreateBookCommand {
+    @TargetAggregateIdentifier
     private String id;
     private String name;
     private String author;
