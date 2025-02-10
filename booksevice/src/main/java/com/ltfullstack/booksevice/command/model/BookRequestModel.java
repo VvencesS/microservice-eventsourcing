@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookRequest {
+public class BookRequestModel {
+    private String id;
     private String name;
     private String author;
     private Boolean isReady;
