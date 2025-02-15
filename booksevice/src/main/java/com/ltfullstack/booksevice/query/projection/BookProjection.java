@@ -35,7 +35,8 @@ public class BookProjection {
     @QueryHandler
     public BookResponseModel handle(GetBookDetailQuery query){
         BookResponseModel response = new BookResponseModel();
-        bookRepository.findById(query.getId()).ifPresent(book -> BeanUtils.copyProperties(book, response));
+        Book book = bookRepository.findById(query.getId()).orElseThrow(() -> new RuntimeException("Not found with id=" + query.getId()));
+        BeanUtils.copyProperties(book, response);
         return response;
     }
 }
