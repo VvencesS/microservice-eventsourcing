@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
@@ -23,6 +22,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((org.springframework.validation.FieldError) error).getField();
             String message = error.getDefaultMessage();
