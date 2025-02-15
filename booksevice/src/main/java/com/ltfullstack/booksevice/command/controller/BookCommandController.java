@@ -4,6 +4,7 @@ import com.ltfullstack.booksevice.command.command.CreateBookCommand;
 import com.ltfullstack.booksevice.command.command.DeleteBookCommand;
 import com.ltfullstack.booksevice.command.command.UpdateBookCommand;
 import com.ltfullstack.booksevice.command.model.BookRequestModel;
+import jakarta.validation.Valid;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class BookCommandController {
     private CommandGateway commandGateway;
 
     @PostMapping
-    public String addBook(@RequestBody BookRequestModel modal){
+    public String addBook(@Valid @RequestBody BookRequestModel modal){
         CreateBookCommand command = new CreateBookCommand(UUID.randomUUID().toString(), modal.getName(), modal.getAuthor(),true);
         return commandGateway.sendAndWait(command);
     }
