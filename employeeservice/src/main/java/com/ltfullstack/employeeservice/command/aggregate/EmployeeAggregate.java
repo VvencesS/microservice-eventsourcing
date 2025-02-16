@@ -1,8 +1,10 @@
 package com.ltfullstack.employeeservice.command.aggregate;
 
 import com.ltfullstack.employeeservice.command.command.CreateEmployeeCommand;
+import com.ltfullstack.employeeservice.command.command.DeleteEmployeeCommand;
 import com.ltfullstack.employeeservice.command.command.UpdateEmployeeCommand;
 import com.ltfullstack.employeeservice.command.event.EmployeeCreatedEvent;
+import com.ltfullstack.employeeservice.command.event.EmployeeDeletedEvent;
 import com.ltfullstack.employeeservice.command.event.EmployeeUpdatedEvent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,13 @@ public class EmployeeAggregate {
         AggregateLifecycle.apply(event);
     }
 
+    @CommandHandler
+    public void handle(DeleteEmployeeCommand command){
+        EmployeeDeletedEvent event = new EmployeeDeletedEvent();
+        BeanUtils.copyProperties(command,event);
+        AggregateLifecycle.apply(event);
+    }
+
     @EventSourcingHandler
     public void on(EmployeeCreatedEvent event){
         this.id = event.getId();
@@ -57,4 +66,9 @@ public class EmployeeAggregate {
         this.kin = event.getKin();
         this.isDisciplined = event.getIsDisciplined();
     }
+    @EventSourcingHandler
+    public void on(EmployeeDeletedEvent event){
+        this.id = event.getId();
+    }
+
 }

@@ -32,4 +32,12 @@ public class EmployeeEventHandler {
         employee.setIsDisciplined(event.getIsDisciplined());
         employeeRespository.save(employee);
     }
+
+    @EventHandler
+    public void on(EmployeeDeletedEvent event){
+        Employee employee = employeeRespository.findById(event.getId())
+                .orElseThrow(() -> new NoSuchElementException("Not found Employee with id="+ event.getId()));
+        employeeRespository.delete(employee);
+    }
+
 }
