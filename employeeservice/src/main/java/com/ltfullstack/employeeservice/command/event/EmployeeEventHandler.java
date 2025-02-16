@@ -25,6 +25,7 @@ public class EmployeeEventHandler {
     }
 
     @EventHandler
+    @DisallowReplay
     public void on(EmployeeUpdatedEvent event){
         Employee employee = employeeRespository.findById(event.getId())
                 .orElseThrow(() -> new NoSuchElementException("Not found Employee with id="+ event.getId()));
