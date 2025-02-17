@@ -4,8 +4,6 @@ import lombok.*;
 import org.springframework.http.HttpStatus;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ErrorMessage {
